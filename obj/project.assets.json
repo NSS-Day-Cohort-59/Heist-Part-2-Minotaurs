@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ryana\\.nuget\\packages\\": {}
+    "C:\\Users\\sorug\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ryana\\workspace\\csharp\\exercises\\PlanYourHeist2\\PlanYourHeist2.csproj",
+      "projectUniqueName": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
       "projectName": "PlanYourHeist2",
-      "projectPath": "C:\\Users\\ryana\\workspace\\csharp\\exercises\\PlanYourHeist2\\PlanYourHeist2.csproj",
-      "packagesPath": "C:\\Users\\ryana\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ryana\\workspace\\csharp\\exercises\\PlanYourHeist2\\obj\\",
+      "projectPath": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
+      "packagesPath": "C:\\Users\\sorug\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ryana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sorug\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -80,7 +80,51 @@ namespace PlanYourHeist2
                         break;
                 }
             }
-
+//create new bank object
+Random rnd = new Random();
+int alarm = rnd.Next(0, 101);
+int vault = rnd.Next(0, 101);
+int securityguard = rnd.Next(0,101);
+int cash = rnd.Next(50000, 1000000);
+Bank bank = new Bank()
+{
+    AlarmScore = alarm,
+    VaultScore = vault,
+    SecurityGuardScore = securityguard,
+    CashOnHand = cash
+};
+List<int> scores = new List<int>()
+{
+    bank.AlarmScore, bank.VaultScore, bank.SecurityGuardScore
+};
+    scores.Sort();
+    foreach (int item in scores)
+    {
+        if (bank.AlarmScore == scores[0])
+        {
+            Console.WriteLine("Least Secure: Alarm");
+        }
+        else if (bank.VaultScore == scores[0])
+        {
+            Console.WriteLine("Least Secure: Vault");
+        }
+        else 
+        {
+            Console.WriteLine("Least Secure: Security Guards");
+        };
+        if (bank.AlarmScore == scores[2])
+        {
+            Console.WriteLine("Most Secure: Alarm");
+        }
+        else if (bank.VaultScore == scores[2])
+        {
+            Console.WriteLine("Most Secure: Vault");
+        }
+        else
+        {
+            Console.WriteLine("Most Secure: Security Guards");
+        }
+    }
 
         }
     }
