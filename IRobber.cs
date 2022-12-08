@@ -8,5 +8,7 @@ namespace PlanYourHeist2
          int SkillLevel {get; set;}
          int PercentageCut {get; set;}
          void PerformSkill(Bank b);
+         //Print out the specialty property of each robber.
+         string PrintSpecialty();
     }
 }
