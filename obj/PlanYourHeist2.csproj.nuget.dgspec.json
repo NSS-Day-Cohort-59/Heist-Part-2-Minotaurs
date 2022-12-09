@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj": {}
+    "C:\\Users\\mqman\\workspace\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj": {
+    "C:\\Users\\mqman\\workspace\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
+        "projectUniqueName": "C:\\Users\\mqman\\workspace\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
         "projectName": "PlanYourHeist2",
-        "projectPath": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
-        "packagesPath": "C:\\Users\\sorug\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sorug\\workspace\\MinotaurHeist\\Heist-Part-2-Minotaurs\\obj\\",
+        "projectPath": "C:\\Users\\mqman\\workspace\\Heist-Part-2-Minotaurs\\PlanYourHeist2.csproj",
+        "packagesPath": "C:\\Users\\mqman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mqman\\workspace\\Heist-Part-2-Minotaurs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sorug\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mqman\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
