@@ -21,12 +21,10 @@ namespace PlanYourHeist2
 
             while (true)
             {
-                Console.WriteLine($"# of contacts in Rolodex: {Rolodex.Count}");
-                Console.WriteLine();
-
                 //prompt for new crewmemeber name
-                Console.WriteLine("What is the name of this crewmember? ");
+                Console.Write("What is the name of this crewmember: ");
                 string newCrewMemeber = Console.ReadLine();
+                Console.WriteLine();
 
                 //prompt continues till blank name entered
                 if (newCrewMemeber == "")
@@ -44,13 +42,18 @@ namespace PlanYourHeist2
                 Console.WriteLine();
 
                 //prompt for skill level 1-100
-                Console.Write("What is this crewmember's skill level (1-100)? ");
+                Console.Write("What is this crewmember's skill level (1-100): ");
                 int selectedSkillLevel = int.Parse(Console.ReadLine());
                 Console.WriteLine();
 
                 //promt for percentage cut
-                Console.Write("What cut of the loot do they want? ");
+                Console.Write("What cut of the loot do they want (1-100): ");
                 int percentageWanted = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine($"Rolodex Contacts: {Rolodex.Count}");
+                Console.WriteLine("--------------------------------------");
                 Console.WriteLine();
 
                 // create new class instance of specified type
@@ -149,24 +152,28 @@ namespace PlanYourHeist2
                     mostSecure = "Most Secure: Security Guards";
                 }
             }
-
+            Console.WriteLine("======================================");
             Console.WriteLine(mostSecure);
             Console.WriteLine(leastSecure);
+            Console.WriteLine("======================================");
             Console.WriteLine();
-
-
 
             //Create a new List and store it in a variable called crew
             List<IRobber> crew = new List<IRobber>();
 
+            // Allow the user to select as many crew members as they'd like from the rolodex. 
             while (true)
             {
+                //Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
                 List<IRobber> availableOperatives = Rolodex
                     .Where(r => r.PercentageCut <= 100 - crew.Sum(r => r.PercentageCut))
                     .Where(r => crew.FirstOrDefault(o => o.Name == r.Name) == null)
                     .ToList();
 
                 //Print out report of the rolodex that includes person's index, name, specialty, skill level and cut 
+                Console.WriteLine();
+                Console.WriteLine("+ Available People +");
+                Console.WriteLine("--------------------------------------");
                 for (int i = 0; i < availableOperatives.Count; i++)
                 {
                     IRobber robber = availableOperatives[i];
@@ -174,6 +181,7 @@ namespace PlanYourHeist2
                 }
 
                 //Prompt user to enter the index of the operative they'd like
+                Console.WriteLine();
                 Console.Write("Please pick an operative by #: ");
                 string operativeIndex = Console.ReadLine();
 
@@ -182,7 +190,6 @@ namespace PlanYourHeist2
                     break;
                 }
 
-
                 //Find robber in rolodex
                 IRobber chosenRobber = Rolodex[int.Parse(operativeIndex)];
 
@@ -190,26 +197,33 @@ namespace PlanYourHeist2
                 crew.Add(chosenRobber);
             }
 
-
-            // Allow the user to select as many crew members as they'd like from the rolodex. 
-
-            //Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
-
-
-            //Once the user enters a blank value for a crew member, we're ready to begin the heist. Each crew member should perform his/her skill on the bank. Afterwards, evaluate if the bank is secure. If not, the heist was a success! Print out a success message to the user. If the bank does still have positive values for any of its security properties, the heist was a failure. Print out a failure message to the user.
+            Console.WriteLine();
+            Console.WriteLine("The heist will begin! Will your crew be successful?");
+            Console.WriteLine("----------------------------------------------------------------");
 
             foreach (IRobber crewMember in crew)
             {
+                //Each crew member should perform his/her skill on the bank.
+                Console.WriteLine();
                 crewMember.PerformSkill(bank);
             }
 
+            //evaluate if the bank is secure
             if (bank.IsSecure)
             {
-                Console.WriteLine("Bad job. Bank Wins");
+                //Print out a failure message to the user
+                Console.WriteLine();
+                Console.WriteLine("************************");
+                Console.WriteLine("Bad job. Bank Wins!");
+                Console.WriteLine("************************");
             }
             else
             {
-                Console.WriteLine("Good Job. Bank lost");
+                //Print out a success message to the user
+                Console.WriteLine();
+                Console.WriteLine("************************");
+                Console.WriteLine("Good Job! Bank lost.");
+                Console.WriteLine("************************");
             }
 
 

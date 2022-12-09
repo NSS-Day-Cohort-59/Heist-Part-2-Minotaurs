@@ -12,7 +12,7 @@ namespace PlanYourHeist2
             //Decrement bank AlarmScore by Hacker SkillLevel
             b.AlarmScore = b.AlarmScore - SkillLevel;
             //Print to the console the name of robber and what action they are performing
-            Console.WriteLine($"{Name} is hacking the alarm syster. Decreased security by {SkillLevel}.");
+            Console.WriteLine($"{Name} is hacking the alarm system. Decreased security by {SkillLevel}.");
             //If alarm score is reduced to 0 or below print msg to console, hacker.name has disabled alarm
             if (b.AlarmScore <= 0)
             {
@@ -23,7 +23,6 @@ namespace PlanYourHeist2
         public string PrintSpecialty()
         {
             return "Hacker";
-            
         }
     }
 }

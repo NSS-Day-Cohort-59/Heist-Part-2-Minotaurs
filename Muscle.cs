@@ -19,7 +19,6 @@ namespace PlanYourHeist2
         public string PrintSpecialty()
         {
             return "Muscle";
-
         }
     }
 }
