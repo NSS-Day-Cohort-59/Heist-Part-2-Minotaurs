@@ -8,13 +8,18 @@ namespace PlanYourHeist2
         public int PercentageCut { get; set; }
         public void PerformSkill(Bank b)
         {
-            throw new System.NotImplementedException();
+            b.VaultScore = b.VaultScore - SkillLevel;
+            Console.WriteLine($"{Name} decreased security by {SkillLevel}");
+            if (b.VaultScore <= 0)
+            {
+                Console.WriteLine($"{Name} has disabled the alarm system!");
+            }
         }
 
-          public string PrintSpecialty()
+        public string PrintSpecialty()
         {
             return "Locksmith";
-            
+
         }
     }
 }

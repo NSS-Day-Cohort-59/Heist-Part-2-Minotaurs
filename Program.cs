@@ -177,6 +177,10 @@ namespace PlanYourHeist2
                 Console.Write("Please pick an operative by #: ");
                 string operativeIndex = Console.ReadLine();
 
+                if (string.IsNullOrEmpty(operativeIndex))
+                {
+                    break;
+                }
 
 
                 //Find robber in rolodex
@@ -187,7 +191,29 @@ namespace PlanYourHeist2
             }
 
 
-            // Allow the user to select as many crew members as they'd like from the rolodex. Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
+            // Allow the user to select as many crew members as they'd like from the rolodex. 
+
+            //Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
+
+
+            //Once the user enters a blank value for a crew member, we're ready to begin the heist. Each crew member should perform his/her skill on the bank. Afterwards, evaluate if the bank is secure. If not, the heist was a success! Print out a success message to the user. If the bank does still have positive values for any of its security properties, the heist was a failure. Print out a failure message to the user.
+
+            foreach (IRobber crewMember in crew)
+            {
+                crewMember.PerformSkill(bank);
+            }
+
+            if (bank.IsSecure)
+            {
+                Console.WriteLine("Bad job. Bank Wins");
+            }
+            else
+            {
+                Console.WriteLine("Good Job. Bank lost");
+            }
+
+
+
         }
     }
 }
