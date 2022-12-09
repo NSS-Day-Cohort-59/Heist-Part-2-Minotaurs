@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlanYourHeist2
 {
@@ -20,28 +21,38 @@ namespace PlanYourHeist2
 
             while (true)
             {
-                //prompt continues till blank name entered
-                Console.WriteLine(Rolodex.Count);
-                Console.WriteLine("What is the name of this crewmember?");
+                Console.WriteLine($"# of contacts in Rolodex: {Rolodex.Count}");
+                Console.WriteLine();
+
+                //prompt for new crewmemeber name
+                Console.WriteLine("What is the name of this crewmember? ");
                 string newCrewMemeber = Console.ReadLine();
 
+                //prompt continues till blank name entered
                 if (newCrewMemeber == "")
                 {
                     break;
                 }
 
-                //print count of items in rolodex
-                //prompt for new crewmemeber name
-                //print possible types (lock,musc,hack)
-                Console.WriteLine("Please Select a Specialty: 1). Hacker, 2). Muscle, 3). Locksmith ");
                 //promt for user to select type
+                Console.Write(@"Select a Specialty: 
+                1). Hacker (disarms security system) 
+                2). Muscle (disarms guards)
+                3). Lockspecialist (disarms vault) 
+                ");
                 int specialtySelected = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
                 //prompt for skill level 1-100
-                Console.WriteLine("What is this crewmember's skill level?");
+                Console.Write("What is this crewmember's skill level (1-100)? ");
                 int selectedSkillLevel = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
                 //promt for percentage cut
-                Console.WriteLine("What cut of the loot they want?");
+                Console.Write("What cut of the loot do they want? ");
                 int percentageWanted = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
                 // create new class instance of specified type
                 switch (specialtySelected)
                 {
@@ -80,11 +91,19 @@ namespace PlanYourHeist2
                         break;
                 }
             }
+
+            //randomly assign values for these properties:
+            //AlarmScore (between 0 and 100)
+            //VaultScore (between 0 and 100)
+            //SecurityGuardScore (between 0 and 100)
+            //CashOnHand (between 50,000 and 1 million)
             Random rnd = new Random();
             int alarm = rnd.Next(0, 101);
             int vault = rnd.Next(0, 101);
             int securityguard = rnd.Next(0, 101);
             int cash = rnd.Next(50000, 1000000);
+
+            //Create a new bank object 
             Bank bank = new Bank()
             {
                 AlarmScore = alarm,
@@ -92,10 +111,12 @@ namespace PlanYourHeist2
                 SecurityGuardScore = securityguard,
                 CashOnHand = cash
             };
+
             List<int> scores = new List<int>()
             {
                 bank.AlarmScore, bank.VaultScore, bank.SecurityGuardScore
             };
+
             scores.Sort();
 
             string mostSecure = "";
@@ -131,27 +152,42 @@ namespace PlanYourHeist2
 
             Console.WriteLine(mostSecure);
             Console.WriteLine(leastSecure);
-            Console.WriteLine("____________");
             Console.WriteLine();
-            //Print out a report of the rolodex that includes the person's index, name, specialty, skill level and cut 
-            for (int i = 0; i < Rolodex.Count; i++)
 
-            {
-                IRobber robber = Rolodex[i];
-                Console.WriteLine($"{i}: {robber.Name}, {robber.PrintSpecialty()}, {robber.SkillLevel}, {robber.PercentageCut}");
-            }
 
-            /*Create a new List<IRobber> and store it in a variable called crew.Prompt the user to enter the index of the operative they'd like 
-            to include in the heist. Once the user selects an operative, add them to the crew list.*/
 
+            //Create a new List and store it in a variable called crew
             List<IRobber> crew = new List<IRobber>();
 
-            Console.Write("Please pick an operative: ");
-            string operativeIndex = Console.ReadLine();
-            //Find robber in rolodex
-            IRobber chosenRobber = Rolodex[int.Parse(operativeIndex)];
+            while (true)
+            {
+                List<IRobber> availableOperatives = Rolodex
+                    .Where(r => r.PercentageCut <= 100 - crew.Sum(r => r.PercentageCut))
+                    .Where(r => crew.FirstOrDefault(o => o.Name == r.Name) == null)
+                    .ToList();
 
-            //Add robber to crew
+                //Print out report of the rolodex that includes person's index, name, specialty, skill level and cut 
+                for (int i = 0; i < availableOperatives.Count; i++)
+                {
+                    IRobber robber = availableOperatives[i];
+                    Console.WriteLine($"{i}: {robber.Name}, {robber.PrintSpecialty()}, {robber.SkillLevel}, {robber.PercentageCut}");
+                }
+
+                //Prompt user to enter the index of the operative they'd like
+                Console.Write("Please pick an operative by #: ");
+                string operativeIndex = Console.ReadLine();
+
+
+
+                //Find robber in rolodex
+                IRobber chosenRobber = Rolodex[int.Parse(operativeIndex)];
+
+                //Add robber to crew
+                crew.Add(chosenRobber);
+            }
+
+
+            // Allow the user to select as many crew members as they'd like from the rolodex. Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
         }
     }
 }
