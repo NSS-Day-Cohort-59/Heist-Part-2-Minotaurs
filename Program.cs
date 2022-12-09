@@ -47,13 +47,13 @@ namespace PlanYourHeist2
                 {
                     case 1:
                         //create new instance of hacker
-                        Hacker One = new Hacker()
+                        Hacker one = new Hacker()
                         {
                             Name = newCrewMemeber,
                             SkillLevel = selectedSkillLevel,
                             PercentageCut = percentageWanted
                         };
-                        Rolodex.Add(One);
+                        Rolodex.Add(one);
                         break;
                     case 2:
                         //create new instance of muscle
@@ -83,7 +83,7 @@ namespace PlanYourHeist2
             Random rnd = new Random();
             int alarm = rnd.Next(0, 101);
             int vault = rnd.Next(0, 101);
-            int securityguard = rnd.Next(0,101);
+            int securityguard = rnd.Next(0, 101);
             int cash = rnd.Next(50000, 1000000);
             Bank bank = new Bank()
             {
@@ -96,48 +96,62 @@ namespace PlanYourHeist2
             {
                 bank.AlarmScore, bank.VaultScore, bank.SecurityGuardScore
             };
-                scores.Sort();
+            scores.Sort();
 
-                string mostSecure = "";
-                string leastSecure = "";
+            string mostSecure = "";
+            string leastSecure = "";
 
-                foreach (int item in scores)
+            foreach (int item in scores)
+            {
+                if (bank.AlarmScore == scores[0])
                 {
-                    if (bank.AlarmScore == scores[0])
-                    {
-                        leastSecure = "leastSecure: Alarm";
-                    }
-                    else if (bank.VaultScore == scores[0])
-                    {
-                        leastSecure ="Least Secure: Vault";
-                    }
-                  else 
-                  {
-                        leastSecure = "Least Secure: Security Guards";
-                  };
-                   if (bank.AlarmScore == scores[2])
-                    {
-                        mostSecure = "Most Secure: Alarm";
-                 }
-                    else if (bank.VaultScore == scores[2])
-                 {
-                        mostSecure = "Most Secure: Vault";
-                 }
-                 else
-                 {
-                        mostSecure = "Most Secure: Security Guards";
-                    }
+                    leastSecure = "leastSecure: Alarm";
                 }
-
-                Console.WriteLine(mostSecure);
-                Console.WriteLine(leastSecure);
-                Console.WriteLine("____________");
-                Console.WriteLine();
-                //Print out a report of the rolodex that includes the person's index, name, specialty, skill level and cut 
-                foreach (IRobber robber in Rolodex)
+                else if (bank.VaultScore == scores[0])
                 {
-                    Console.WriteLine($"{robber.Name}, {robber.PrintSpecialty()}, {robber.SkillLevel}, {robber.PercentageCut}");
+                    leastSecure = "Least Secure: Vault";
                 }
+                else
+                {
+                    leastSecure = "Least Secure: Security Guards";
+                };
+                if (bank.AlarmScore == scores[2])
+                {
+                    mostSecure = "Most Secure: Alarm";
+                }
+                else if (bank.VaultScore == scores[2])
+                {
+                    mostSecure = "Most Secure: Vault";
+                }
+                else
+                {
+                    mostSecure = "Most Secure: Security Guards";
+                }
+            }
+
+            Console.WriteLine(mostSecure);
+            Console.WriteLine(leastSecure);
+            Console.WriteLine("____________");
+            Console.WriteLine();
+            //Print out a report of the rolodex that includes the person's index, name, specialty, skill level and cut 
+            for (int i = 0; i < Rolodex.Count; i++)
+
+            {
+                IRobber robber = Rolodex[i];
+                Console.WriteLine($"{i}: {robber.Name}, {robber.PrintSpecialty()}, {robber.SkillLevel}, {robber.PercentageCut}");
+            }
+
+            /*Create a new List<IRobber> and store it in a variable called crew.Prompt the user to enter the index of the operative they'd like 
+            to include in the heist. Once the user selects an operative, add them to the crew list.*/
+
+            List<IRobber> crew = new List<IRobber>();
+
+            Console.Write("Please pick an operative: ");
+            string operativeIndex = Console.ReadLine();
+            //Find robber in rolodex
+            IRobber chosenRobber = Rolodex[int.Parse(operativeIndex)];
+
+            //Add robber to crew
         }
     }
 }

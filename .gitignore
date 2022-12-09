@@ -9,3 +9,4 @@
 !.vscode/extensions.json
 obj/Debug/*
 obj/
+bin/
